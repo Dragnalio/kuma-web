@@ -8,10 +8,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "yarn lint:js",
-    "dokku": {
-      "predeploy": "yarn build"
-    }
+    "lint": "yarn lint:js"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.2",
