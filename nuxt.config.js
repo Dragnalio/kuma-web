@@ -41,11 +41,11 @@ export default {
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     proxy: true,
-    prefix: '/api'
+    prefix: '/api/v1'
   },
 
   proxy: {
-    '/api': `${process.env.API_URL}`
+    '/api/v1': `${process.env.API_URL}/v1`
   },
 
   auth: {
