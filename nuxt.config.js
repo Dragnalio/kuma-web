@@ -45,7 +45,7 @@ export default {
   },
 
   proxy: {
-    '/api/v1': `${process.env.API_URL}/v1`
+    '/api/v1': `${process.env.API_URL}`
   },
 
   auth: {
