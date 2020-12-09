@@ -34,16 +34,31 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    proxy: true
+    proxy: true,
+    prefix: '/api'
   },
 
   proxy: {
-    '/api/': `${process.env.API_URL}`
+    '/api': `${process.env.API_URL}`
+  },
+
+  auth: {
+    // Options
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/login', method: 'post', propertyName: 'access_token' },
+          user: { url: '/user', method: 'get', propertyName: false } // It can be false to directly use API response
+        }
+      }
+    }
+
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
