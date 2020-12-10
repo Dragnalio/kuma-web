@@ -2,6 +2,7 @@
   <div>
     <form @submit.prevent="userLogin">
       <div>
+        {{ errorMessage }}
         <label>Email</label>
         <input v-model="login.email" type="email">
       </div>
@@ -26,18 +27,24 @@ export default {
       login: {
         email: '',
         password: ''
-      }
+      },
+      errorMessage: ''
     }
   },
   methods: {
     async userLogin () {
       try {
-        const response = await this.$auth.loginWith('local', { data: this.login })
-        console.log(response)
-      } catch (err) {
-        console.log(err)
+        this.errorMessage = ''
+        await this.$auth.loginWith('local', { data: this.login })
+      } catch (e) {
+        if (e.response) {
+          this.errorMessage = e.response.message
+        } else {
+          this.errorMessage = e.message
+        }
       }
     }
+
   }
 }
 </script>

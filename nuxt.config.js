@@ -37,17 +37,21 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     proxy: true,
-    prefix: '/api/v1'
+    prefix: '/api'
   },
 
   proxy: {
     '/api/v1': `${process.env.API_URL}`
+  },
+
+  router: {
+    middleware: ['auth']
   },
 
   auth: {
@@ -55,12 +59,11 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/login', method: 'post', propertyName: 'access_token' },
-          user: { url: '/user', method: 'get', propertyName: false } // It can be false to directly use API response
+          login: { url: '/v1/login', method: 'post', propertyName: 'access_token' },
+          user: { url: '/v1/user', method: 'get', propertyName: false } // It can be false to directly use API response
         }
       }
     }
-
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
