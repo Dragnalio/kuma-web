@@ -10,7 +10,7 @@ export const mutations = {
 
 export const actions = {
   async fetchAnimes ({ commit }) {
-    const { data } = await this.$axios.get('/v1/animes')
+    const { data } = await this.$axios.get('/api/v1/animes')
     commit('SET_ANIMES', data)
   }
 }

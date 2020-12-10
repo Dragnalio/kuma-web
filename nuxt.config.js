@@ -1,4 +1,8 @@
 export default {
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:8000'
+  },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'kuma-web',
@@ -39,14 +43,7 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {
-    proxy: true,
-    prefix: '/api'
-  },
-
-  proxy: {
-    '/api/v1': `${process.env.API_URL}`
-  },
+  axios: {},
 
   router: {
     middleware: ['auth']
@@ -57,14 +54,24 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/v1/login', method: 'post', propertyName: 'access_token' },
-          user: { url: '/v1/user', method: 'get', propertyName: false } // It can be false to directly use API response
+          login: { url: '/api/v1/login', method: 'post', propertyName: 'access_token' },
+          user: { url: '/api/v1/user', method: 'get', propertyName: false } // It can be false to directly use API response
         }
       }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/'
     }
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+
+  server: {
+    host: '0.0.0.0'
   }
 }
